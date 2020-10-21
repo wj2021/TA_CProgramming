@@ -38,7 +38,7 @@ def login(username, password):
 
 if __name__ == '__main__':
     # 登录oj
-    session_requests = login('mf1933101', '19961211')
+    session_requests = login('xxxxxxxx', 'xxxxxxxx')
     # 获取网页文档
     r = session_requests.get(data_url, headers=header)
     # 使用BeautifulSoup库解析网页
