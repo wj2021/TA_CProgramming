@@ -1,0 +1,38 @@
+{
+	"folders": [
+		{
+			"name": "#ctest",
+			"path": "#ctest"
+		},
+		{
+			"name": "CheatDetection",
+			"path": "CheatDetection"
+		},
+		{
+			"name": "CheckError",
+			"path": "CheckError"
+		},
+		{
+			"name": "ConsoleCalendar",
+			"path": "ConsoleCalendar"
+		},
+		{
+			"name": "EightQueue",
+			"path": "EightQueue"
+		},
+		{
+			"name": "GetScore",
+			"path": "GetScore"
+		}
+	],
+	"settings": {
+		"java.project.referencedLibraries": [
+			"lib/**/*.jar",
+			"moji-1.0.2/commons-io-2.6.jar",
+			"moji-1.0.2/commons-io-2.6-sources.jar",
+			"moji-1.0.2/moji-1.0.2.jar",
+			"moji-1.0.2/moji-1.0.2-javadoc.jar",
+			"moji-1.0.2/moji-1.0.2-sources.jar"
+		]
+	}
+}
