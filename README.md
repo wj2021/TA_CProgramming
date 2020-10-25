@@ -11,8 +11,8 @@
 C/C++练习代码。
 
 ## RouteClean
-由于南大VPN EasyConnet在开启后会进行全局代理，导致访问非校内资源卡顿，我们发现该VPN软件是通过在本地添加路由表的方式进行代理的，所以我们只要删除本地无用的路由表即可实现只在访问校内资源时通过VPN。
-
-南大校内资源ip地址在登录EasyConnet可以看见，见njuUrl.txt。
-
-RouteClean.exe由于利用cmd命令删除路由表，需要以管理员身份运行才有效。
+由于南大VPN EasyConnet在开启后会进行全局代理，导致访问非校内资源卡顿，我们发现该VPN软件是通过在本地添加路由表的方式进行代理的，所以我们只要删除本地无用的路由表即可实现只在访问校内资源时通过VPN。\\
+南大校内资源ip地址在登录EasyConnet可以看见，见njuUrl.txt。\\
+支持windwos和MacOs系统\\
+RouteCleanForWindows.exe由于利用cmd命令删除路由表，需要以管理员身份运行才有效。\\
+RouteCleanForMac.app同样需要在终端使用root用户执行才有效。
