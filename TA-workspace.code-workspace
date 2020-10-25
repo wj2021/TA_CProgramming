@@ -13,12 +13,12 @@
 			"path": "CheckError"
 		},
 		{
-			"name": "ConsoleCalendar",
-			"path": "ConsoleCalendar"
+			"name": "Example",
+			"path": "Example"
 		},
 		{
-			"name": "EightQueue",
-			"path": "EightQueue"
+			"name": "RouteClean",
+			"path": "RouteClean"
 		},
 		{
 			"name": "GetScore",
