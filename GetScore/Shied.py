@@ -50,7 +50,7 @@ def getCode(session_request, token, assignment, problem, stuid, submit_id):
 
 if __name__ == '__main__':
     # 登录oj
-    session_requests, token = login('mf1933101', '19961211')
+    session_requests, token = login('xxxxxxxx', 'xxxxxxxx')
     # 获取网页文档
     r = session_requests.get(data_url, headers={'User-Agent': user_agent})
     # 使用BeautifulSoup库解析网页
