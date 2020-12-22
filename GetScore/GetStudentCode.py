@@ -1,9 +1,11 @@
 from bs4 import BeautifulSoup
 import requests
-import re
+import json
+import os
+import time
 
 # 学生成绩所在的网址url
-data_url = "http://114.212.86.242:10002/index.php/submissions/final/problem/3"
+data_url = "http://114.212.86.242:10002/index.php/submissions/final/problem/5"
 
 login_url = 'http://114.212.86.242:10002/index.php/login'
 view_code_url = 'http://114.212.86.242:10002/index.php/submissions/view_code'
@@ -29,7 +31,7 @@ def login(username, password):
 
 
 # 通过学号获取学生提交的代码
-def getCode(session_request, token, assignment, problem, stuid, submit_id):
+def getCode(session_request, token, assignment, problem, submit_id, stuid):
     if token is None or token == '':
         raise Exception("token error!")
     post_data = {
@@ -57,32 +59,23 @@ if __name__ == '__main__':
     mySoup = BeautifulSoup(r.text, 'html.parser')
     # 每一行保存一个学生的信息
     trs = mySoup.find_all(name='tr')
-    stuInfo = {} # Map<String, int[3]> int[2]：[0]是成绩，[1]是是否有延迟, [2]是提交id
+    stuSubmitIds = []
     for tr in trs:
         if tr.attrs.get('data-u') is not None:
             tds = tr.find_all('td')
             if tds[2].text[0]=='1' or tds[2].text[0]=='2' : # 按学号过滤非本科生的提交记录
-                delay = tds[7].text.strip()
-                stuInfo[tds[2].text] = [int(tds[8].text.strip())/10, int(delay[delay.index('\n')+1:delay.index('%')].strip()), tds[1].text.strip()]
-    print('submitted_total_count:', len(stuInfo))
+                truple = [tds[1].text, tds[2].text]
+                stuSubmitIds.append(truple)
+    print('submitted_total_count:', len(stuSubmitIds))
 
-
-    shieds = ['strcpy', 'strncpy', 'strcat', 'strchr', 'strcmp', 'strnicmp', 'strcspn', 'strdup', 
-    'stricmp', 'strerror', 'strcmpi', 'strncmp', 'strncpy', 'strnicmp', 'strnset', 'strpbrk',
-    'strrchr', 'strrev', 'strspn', 'strstr', 'strtod', 'strtok', 'strtol', 'strupr', 'swap']
-    # 通过学生学号获取学生提交的代码
-
-    result = {}
-
-    for stuid, info in stuInfo.items():
-        r = getCode(session_requests, token, 18, 3, stuid, info[2])
-        find = 0
-        for shied in shieds:
-            findstr = '[^a-zA-Z0-9_]'+shied+'\\s*\('
-            m = re.search(findstr, r.text)
-            if m is not None:
-                result[stuid] = m.group()
-                break
-    
-    for k, v in result.items():
-        print(k, v)
+    # 通过学生学号获取学生提交的代码并保存到桌面的文件夹中
+    savepath = "C:/Users/Jun/Desktop/code_"+str(int(time.time()))+"/"
+    if not os.path.exists(savepath):
+        os.mkdir(savepath)
+    for stuSubmitId in stuSubmitIds:
+        r = getCode(session_requests, token, 18, 5, stuSubmitId[0], stuSubmitId[1])
+        dic = json.loads(r.text)
+        # save code to file
+        filepath = savepath + str(stuSubmitId[1]) + "." + str(dic['lang'])
+        with open(filepath, mode='w+', encoding='utf-8') as f:
+            f.write(dic['text'])
